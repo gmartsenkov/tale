@@ -34,33 +34,3 @@
                  (:args))]
     (when (and sub args)
       (apply (:handler sub) args))))
-
-
-(def global-listeners
-  {:user-created [(fn [user] (println user "user-created"))
-                  (fn [user] (println user "user-created-2"))]})
-
-
-(def result
-  (wrap-broadcasts global-listeners
-                   (fn [broadcast]
-                     (broadcast :user-created {:id 1 :name "Gogo"})
-                     (when false
-                       (broadcast :user-updated {:id 2 :name "Bob"}))
-                     (broadcast :user-deleted {:id 3 :name "Jon"}))))
-
-
-(-> result
-    (on :user-created
-        (fn [user] (:id user)))
-    (on :user-updated
-        (fn [user] (:id user)))
-    (on :user-deleted
-        (fn [_user] :user-deleted))
-    (call-first))
-
-
-(-> result
-    (on :user-updated
-        (fn [_user] :user-deleted))
-    (call-first))
