@@ -27,6 +27,7 @@
              [{:event :user-created, :handler handler, :matched true}
               {:event :user-deleted, :handler handler, :matched false}])))))
 
+
 (deftest test-call-first
   (testing "calls the first broadcast"
     (let [broadcasts (wrap-broadcasts {}

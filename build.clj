@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [test])
   (:require
     [clojure.tools.build.api :as b]
-    ; for b/git-count-revs
+    ;; for b/git-count-revs
     [org.corfield.build :as bb]))
 
 
